@@ -1,13 +1,4 @@
-/*
- * Copyright 2006-2019 (c) Care.com, Inc.
- * 1400 Main Street, Waltham, MA, 02451, U.S.A.
- * All rights reserved.
- *
- * This software is the confidential and proprietary information of
- * Care.com, Inc. ("Confidential Information").  You shall not disclose
- * such Confidential Information and shall use it only in accordance with
- * the terms of an agreement between you and CZen.
- */
+
 package DP;
 
 /**
@@ -16,6 +7,20 @@ package DP;
  * @author Rohit Rawani
  */
 public class MaxSumWithoutAdjacent {
+  public static int maxSumExcludingAdjacent(int[] arr, int n){
+    if(n<0){
+      return 0;
+    }
+    if(n==0){
+      return arr[0];
+    }
+
+    int include = maxSumExcludingAdjacent(arr, n-2) + arr[n];
+    int exclude = maxSumExcludingAdjacent(arr, n-1) + 0;
+
+    return Math.max(include, exclude);
+  }
+
   public static int rob(int[] nums) {
     int excludingFirst = calculateSum(nums, 1, nums.length);
     int excludingLast = calculateSum(nums, 0, nums.length-1);
@@ -35,8 +40,10 @@ public class MaxSumWithoutAdjacent {
   }
 
   public static void main(String[] args) {
-    int[] arr = new int[]{1, 2,3,1};
+    int[] arr = new int[]{1, 2, 3, 1};
     int res = rob(arr);
     System.out.println(res);
+
+    System.out.println(maxSumExcludingAdjacent(arr, arr.length - 1));
   }
 }

@@ -1,13 +1,4 @@
-/*
- * Copyright 2006-2019 (c) Care.com, Inc.
- * 1400 Main Street, Waltham, MA, 02451, U.S.A.
- * All rights reserved.
- *
- * This software is the confidential and proprietary information of
- * Care.com, Inc. ("Confidential Information").  You shall not disclose
- * such Confidential Information and shall use it only in accordance with
- * the terms of an agreement between you and CZen.
- */
+
 package Greedy;
 
 /**
@@ -67,8 +58,34 @@ public class JumpGame {
     return canJumpFromPosition(0, nums);
   }
   public static void main(String[] args) {
-    int[] arr  = {1,0,2};
-    System.out.println(canJump(arr));
+    int[] arr  = {1,1,2};
+//    System.out.println(canJump(arr));
+      findMinJump(arr);
   }
+
+  public static void findMinJump(int[] arr){
+      System.out.println(findMinJump(arr, 0, 0));
+  }
+
+    private static int findMinJump(int[] arr, int index, int count) {
+        if (index == arr.length - 1) {
+            return count;
+        }
+        int min = Integer.MAX_VALUE;
+
+        int j = 0;
+        count = 0;
+        while (j < arr[index]) {
+            j++;
+            int current = findMinJump(arr, index + j, ++count);
+            if (current < min) {
+                min = current;
+            }
+
+        }
+
+        return min;
+    }
+
 
 }
